@@ -20,12 +20,15 @@ import java.io.IOException
 
 class AddViewModel(private val fullStackRepository: FullStackRepository) : ViewModel() {
 
-    var uiState: AddUiState by mutableStateOf(AddUiState.Loading)
+    var uiState: AddUiState by mutableStateOf(AddUiState.StandBy)
         private set
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
+    fun getUiState(){
+        uiState = AddUiState.StandBy
+    }
 
     fun postProfileData(postProfileRequest: PostProfileRequest) {
         viewModelScope.launch {

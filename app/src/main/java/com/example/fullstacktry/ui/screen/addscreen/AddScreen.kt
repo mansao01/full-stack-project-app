@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,21 +40,21 @@ import com.example.fullstacktry.network.request.PostProfileRequest
 import com.example.fullstacktry.ui.common.AddUiState
 import com.example.fullstacktry.ui.component.ProgressbarDialog
 
-
 @Composable
 fun AddScreen(
     uiState: AddUiState,
     modifier: Modifier = Modifier,
     addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory)
 ) {
-    AddScreenContent(addViewModel, modifier = modifier)
-    val isLoading by addViewModel.isLoading.collectAsState()
+//    val isLoading by addViewModel.isLoading.collectAsState()
     val context = LocalContext.current
-    if (isLoading) {
-        ProgressbarDialog()
-    }
+//    if (isLoading) {
+//        ProgressbarDialog()
+//    }
+        addViewModel.getUiState()
     when (uiState) {
-        is AddUiState.Loading -> {}
+        is AddUiState.StandBy -> AddScreenContent(addViewModel, modifier = modifier)
+        is AddUiState.Loading -> ProgressbarDialog()
         is AddUiState.Success -> mToast(context, uiState.postData.msg.toString())
         is AddUiState.Error -> mToast(context, uiState.message)
     }
