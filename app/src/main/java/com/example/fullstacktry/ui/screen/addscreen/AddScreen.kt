@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fullstacktry.R
 import com.example.fullstacktry.network.request.PostProfileRequest
+import com.example.fullstacktry.network.response.PostProfileResponse
 import com.example.fullstacktry.ui.common.AddUiState
 
 
@@ -54,8 +55,9 @@ fun AddScreen(
     }
     when (uiState) {
         is AddUiState.Loading -> {}
-        is AddUiState.Success -> mToast(context, "Data added")
-        is AddUiState.Error -> mToast(context, "Fail to add data")
+        is AddUiState.Success -> mToast(context, uiState.postData)
+        is AddUiState.Error -> Toast.makeText(context, "Fail to post data", Toast.LENGTH_SHORT)
+            .show()
     }
 }
 
@@ -200,6 +202,6 @@ fun AddScreenContent(
     }
 }
 
-private fun mToast(context: Context, message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+private fun mToast(context: Context, postResponse: PostProfileResponse) {
+    Toast.makeText(context, postResponse.msg, Toast.LENGTH_SHORT).show()
 }
