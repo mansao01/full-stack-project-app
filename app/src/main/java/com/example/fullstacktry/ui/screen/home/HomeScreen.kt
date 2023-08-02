@@ -49,15 +49,18 @@ fun HomeScreen(
 @Composable
 fun UserList(
     userList: List<DataItem>,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     LazyColumn(modifier = modifier.fillMaxWidth()) {
         items(userList) {
             ListItem(
+                id=it.id,
                 name = it.name,
                 age = it.age,
                 address = it.address,
+                homeViewModel,
                 modifier = modifier.clickable {
                     mToast(context, it.name)
                 })
@@ -78,7 +81,7 @@ fun RefreshData(
         state = swipeRefreshState,
         onRefresh = {homeViewModel.getUserList() },
     ) {
-        UserList(userList = userList)
+        UserList(userList = userList,homeViewModel)
     }
 }
 

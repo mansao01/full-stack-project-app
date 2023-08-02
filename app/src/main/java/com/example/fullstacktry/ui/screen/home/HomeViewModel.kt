@@ -47,6 +47,23 @@ class HomeViewModel(private val fullStackRepository: FullStackRepository) : View
         }
     }
 
+    fun deleteProfile(id:Int){
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                fullStackRepository.deleteProfile(id)
+                _isLoading.value = false
+
+            }catch (e: IOException) {
+                _isLoading.value = false
+                HomeUiState.Error
+            } catch (e: HttpException) {
+                _isLoading.value = false
+                HomeUiState.Error
+            }
+        }
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
