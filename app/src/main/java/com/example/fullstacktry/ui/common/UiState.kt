@@ -12,6 +12,6 @@ sealed interface HomeUiState {
 
 sealed interface AddUiState {
     data class Success(val postData: PostProfileResponse) : AddUiState
-    object Error : AddUiState
+    data class Error(val message:String) : AddUiState
     object Loading : AddUiState
 }

@@ -38,10 +38,10 @@ class AddViewModel(private val fullStackRepository: FullStackRepository) : ViewM
                 AddUiState.Success(result!!)
             }catch (e: IOException) {
                 _isLoading.value = false
-                AddUiState.Error
+                AddUiState.Error(e.message.toString())
             } catch (e: HttpException) {
                 _isLoading.value = false
-                AddUiState.Error
+                AddUiState.Error(e.message.toString())
             }
         }
     }

@@ -55,7 +55,7 @@ fun AddScreen(
     when (uiState) {
         is AddUiState.Loading -> {}
         is AddUiState.Success -> mToast(context, uiState.postData.msg.toString())
-        is AddUiState.Error -> mToast(context, stringResource(R.string.fail_to_post_data))
+        is AddUiState.Error -> mToast(context, uiState.message)
     }
 }
 
@@ -195,7 +195,6 @@ fun AddScreenContent(
                 .padding(top = 18.dp)
         ) {
             Text(text = "Post")
-
         }
     }
 }
