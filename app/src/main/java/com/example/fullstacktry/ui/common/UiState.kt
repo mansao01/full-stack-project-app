@@ -1,6 +1,5 @@
 package com.example.fullstacktry.ui.common
 
-import com.example.fullstacktry.network.response.DeleteProfileResponse
 import com.example.fullstacktry.network.response.PostProfileResponse
 import com.example.fullstacktry.network.response.UserResponse
 

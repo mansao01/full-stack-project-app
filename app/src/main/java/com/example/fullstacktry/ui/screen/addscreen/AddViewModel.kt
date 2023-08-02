@@ -12,7 +12,6 @@ import com.example.FullStackApplication
 import com.example.fullstacktry.data.FullStackRepository
 import com.example.fullstacktry.network.request.PostProfileRequest
 import com.example.fullstacktry.ui.common.AddUiState
-import com.example.fullstacktry.ui.common.HomeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

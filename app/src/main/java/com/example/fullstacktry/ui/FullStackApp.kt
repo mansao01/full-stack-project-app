@@ -57,7 +57,7 @@ fun FullStackApp(
             }
             composable(Screen.Add.route) {
                 val addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory)
-                AddScreen(addViewModel.uiState)
+                AddScreen(modifier,addViewModel.uiState)
             }
         }
     }

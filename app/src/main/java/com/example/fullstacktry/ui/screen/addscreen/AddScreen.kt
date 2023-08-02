@@ -13,7 +13,6 @@ import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.PersonOutline
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
@@ -37,27 +36,26 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fullstacktry.R
 import com.example.fullstacktry.network.request.PostProfileRequest
-import com.example.fullstacktry.network.response.PostProfileResponse
 import com.example.fullstacktry.ui.common.AddUiState
+import com.example.fullstacktry.ui.component.ProgressbarDialog
 
 
 @Composable
 fun AddScreen(
+    modifier: Modifier = Modifier,
     uiState: AddUiState,
-    addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory),
-    modifier: Modifier = Modifier
+    addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory)
 ) {
-    AddScreenContent(addViewModel)
+    AddScreenContent(addViewModel, modifier = modifier)
     val isLoading by addViewModel.isLoading.collectAsState()
     val context = LocalContext.current
     if (isLoading) {
-        CircularProgressIndicator()
+        ProgressbarDialog()
     }
     when (uiState) {
         is AddUiState.Loading -> {}
-        is AddUiState.Success -> mToast(context, uiState.postData)
-        is AddUiState.Error -> Toast.makeText(context, "Fail to post data", Toast.LENGTH_SHORT)
-            .show()
+        is AddUiState.Success -> mToast(context, uiState.postData.msg.toString())
+        is AddUiState.Error -> mToast(context, stringResource(R.string.fail_to_post_data))
     }
 }
 
@@ -202,6 +200,6 @@ fun AddScreenContent(
     }
 }
 
-private fun mToast(context: Context, postResponse: PostProfileResponse) {
-    Toast.makeText(context, postResponse.msg, Toast.LENGTH_SHORT).show()
+private fun mToast(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

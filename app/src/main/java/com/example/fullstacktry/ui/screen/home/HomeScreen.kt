@@ -3,21 +3,32 @@ package com.example.fullstacktry.ui.screen.home
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.NaturePeople
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fullstacktry.network.response.DataItem
 import com.example.fullstacktry.ui.common.HomeUiState
 import com.example.fullstacktry.ui.component.ErrorScreen
 import com.example.fullstacktry.ui.component.ListItem
 import com.example.fullstacktry.ui.component.LoadingScreen
+import com.example.fullstacktry.ui.component.LoadingScreenWithText
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -28,22 +39,19 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
-//    will call getUserList when change screen
+//    will call getUserList when changed to home screen
     LaunchedEffect(Unit) {
         homeViewModel.getUserList()
     }
 
     when (uiState) {
-        is HomeUiState.Loading -> LoadingScreen()
+        is HomeUiState.Loading -> LoadingScreenWithText()
         is HomeUiState.Success -> {
-//            UserList(userList = uiState.profile.data)
-            RefreshData(userList = uiState.profile.data, homeViewModel = homeViewModel)
+            RefreshData(userList = uiState.profile.data, homeViewModel = homeViewModel, modifier = modifier)
         }
-
 
         is HomeUiState.Error -> ErrorScreen()
     }
-
 }
 
 @Composable
@@ -53,19 +61,38 @@ fun UserList(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    LazyColumn(modifier = modifier.fillMaxWidth()) {
-        items(userList) {
-            ListItem(
-                id=it.id,
-                name = it.name,
-                age = it.age,
-                address = it.address,
-                homeViewModel,
-                modifier = modifier.clickable {
-                    mToast(context, it.name)
-                })
+
+    if (userList.isEmpty()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Default.NaturePeople,
+                contentDescription = null,
+                modifier = Modifier.size(62.dp)
+
+            )
+            Text(text = "Seems you don't have any data")
+        }
+    } else {
+        LazyColumn(modifier = modifier.fillMaxWidth()) {
+            items(userList) { data ->
+                ListItem(
+                    id = data.id,
+                    name = data.name,
+                    age = data.age,
+                    address = data.address,
+                    homeViewModel,
+                    modifier = modifier.clickable {
+                        mToast(context, data.name)
+                    })
+
+            }
         }
     }
+
 }
 
 @Composable
@@ -79,9 +106,10 @@ fun RefreshData(
 
     SwipeRefresh(
         state = swipeRefreshState,
-        onRefresh = {homeViewModel.getUserList() },
+        onRefresh = { homeViewModel.getUserList() },
+        modifier = modifier
     ) {
-        UserList(userList = userList,homeViewModel)
+        UserList(userList = userList, homeViewModel)
     }
 }
 
