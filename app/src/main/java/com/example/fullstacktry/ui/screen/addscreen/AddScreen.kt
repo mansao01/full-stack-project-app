@@ -42,8 +42,8 @@ import com.example.fullstacktry.ui.component.ProgressbarDialog
 
 @Composable
 fun AddScreen(
-    modifier: Modifier = Modifier,
     uiState: AddUiState,
+    modifier: Modifier = Modifier,
     addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory)
 ) {
     AddScreenContent(addViewModel, modifier = modifier)
