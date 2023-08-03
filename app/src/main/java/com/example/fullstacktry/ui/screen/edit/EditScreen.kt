@@ -69,6 +69,7 @@ fun EditScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditScreenContent(
     editViewModel: EditViewModel,
