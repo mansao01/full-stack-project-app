@@ -18,7 +18,7 @@ interface FullStackRepository {
 
     suspend fun deleteProfile(id: Int): DeleteProfileResponse
 
-    suspend fun updateProfile(updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse
+    suspend fun updateProfile(updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse?
 }
 
 class NetworkFullStackRepository(

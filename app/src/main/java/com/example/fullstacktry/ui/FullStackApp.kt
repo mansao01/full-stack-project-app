@@ -31,6 +31,7 @@ import com.example.fullstacktry.ui.navigation.Screen
 import com.example.fullstacktry.ui.screen.add.AddScreen
 import com.example.fullstacktry.ui.screen.add.AddViewModel
 import com.example.fullstacktry.ui.screen.edit.EditScreen
+import com.example.fullstacktry.ui.screen.edit.EditViewModel
 import com.example.fullstacktry.ui.screen.home.HomeScreen
 import com.example.fullstacktry.ui.screen.home.HomeViewModel
 
@@ -64,9 +65,11 @@ fun FullStackApp(
             composable(Screen.Update.route, arguments = listOf(navArgument("profileId"){
                 type = NavType.IntType
             })){ data ->
+                val editViewMode: EditViewModel = viewModel(factory = EditViewModel.Factory)
                 val profileId = data.arguments?.getInt("profileId") ?: -1
-                EditScreen(id = profileId)
+                EditScreen(id = profileId, uiState = editViewMode.uiState)
             }
+
             composable(Screen.Add.route) {
                 val addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory)
                 AddScreen(addViewModel.uiState)

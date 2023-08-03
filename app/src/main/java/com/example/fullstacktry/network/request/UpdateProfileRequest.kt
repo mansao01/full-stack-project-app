@@ -11,5 +11,4 @@ data class UpdateProfileRequest(
 
     @field:SerializedName("address")
     val address: String,
-
-    )
+)

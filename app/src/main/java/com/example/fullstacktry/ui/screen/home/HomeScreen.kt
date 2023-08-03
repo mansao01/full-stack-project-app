@@ -93,7 +93,6 @@ fun UserList(
                     address = data.address,
                     homeViewModel,
                     modifier = modifier.clickable {
-                        mToast(context, data.name)
                         navigateToUpdate(data.id)
                     })
 
@@ -122,8 +121,5 @@ fun RefreshData(
     }
 }
 
-private fun mToast(context: Context, text: String) {
-    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
-}
 
 

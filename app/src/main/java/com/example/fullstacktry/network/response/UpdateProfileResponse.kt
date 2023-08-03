@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class UpdateProfileResponse(
 
 	@field:SerializedName("msg")
-	val msg: String
+	val msg: String? = null
 )

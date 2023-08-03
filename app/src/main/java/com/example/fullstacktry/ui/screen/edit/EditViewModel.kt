@@ -42,7 +42,7 @@ class EditViewModel(private val fullStackRepository: FullStackRepository) : View
             uiState = UpdateUiState.Loading
             uiState = try {
                 val result = fullStackRepository.updateProfile(updateProfileRequest)
-                UpdateUiState.Success(result)
+                UpdateUiState.Success(result!!)
             }catch (e: IOException) {
                 UpdateUiState.Error(e.message.toString())
             } catch (e: HttpException) {
