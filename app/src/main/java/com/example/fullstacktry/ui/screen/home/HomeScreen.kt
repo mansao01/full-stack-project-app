@@ -36,6 +36,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @Composable
 fun HomeScreen(
     uiState: HomeUiState,
+    navigateToUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
@@ -47,7 +48,12 @@ fun HomeScreen(
     when (uiState) {
         is HomeUiState.Loading -> LoadingScreenWithText()
         is HomeUiState.Success -> {
-            RefreshData(userList = uiState.profile.data, homeViewModel = homeViewModel, modifier = modifier)
+            RefreshData(
+                userList = uiState.profile.data,
+                homeViewModel = homeViewModel,
+                navigateToUpdate = navigateToUpdate,
+                modifier = modifier
+            )
         }
 
         is HomeUiState.Error -> ErrorScreen()
@@ -58,6 +64,7 @@ fun HomeScreen(
 fun UserList(
     userList: List<DataItem>,
     homeViewModel: HomeViewModel,
+    navigateToUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -87,6 +94,7 @@ fun UserList(
                     homeViewModel,
                     modifier = modifier.clickable {
                         mToast(context, data.name)
+                        navigateToUpdate(data.id)
                     })
 
             }
@@ -99,6 +107,7 @@ fun UserList(
 fun RefreshData(
     userList: List<DataItem>,
     homeViewModel: HomeViewModel,
+    navigateToUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val isLoading by homeViewModel.isLoading.collectAsState()
@@ -109,7 +118,7 @@ fun RefreshData(
         onRefresh = { homeViewModel.getUserList() },
         modifier = modifier
     ) {
-        UserList(userList = userList, homeViewModel)
+        UserList(userList = userList, homeViewModel, navigateToUpdate)
     }
 }
 

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.fullstacktry.ui.screen.addscreen
+package com.example.fullstacktry.ui.screen.add
 
 import android.content.Context
 import android.widget.Toast
@@ -20,8 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,7 +49,7 @@ fun AddScreen(
 //    if (isLoading) {
 //        ProgressbarDialog()
 //    }
-        addViewModel.getUiState()
+    addViewModel.getUiState()
     when (uiState) {
         is AddUiState.StandBy -> AddScreenContent(addViewModel, modifier = modifier)
         is AddUiState.Loading -> ProgressbarDialog()

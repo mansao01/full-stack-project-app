@@ -8,8 +8,8 @@ interface AppContainer {
     val fullStackRepository:FullStackRepository
 }
 class DefaultAppContainer : AppContainer {
-//    base url depend from pc's ip address
-    private val baseUrl = "http://192.168.18.161:8000/"
+//    base url depend from {pc's ip address}:8000
+    private val baseUrl = "http://192.168.18.162:8000/"
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())

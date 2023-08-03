@@ -1,4 +1,4 @@
-package com.example.fullstacktry.ui.screen.addscreen
+package com.example.fullstacktry.ui.screen.add
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

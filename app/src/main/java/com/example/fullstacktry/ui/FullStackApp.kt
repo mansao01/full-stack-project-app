@@ -20,14 +20,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.fullstacktry.R
 import com.example.fullstacktry.ui.navigation.NavigationItem
 import com.example.fullstacktry.ui.navigation.Screen
-import com.example.fullstacktry.ui.screen.addscreen.AddScreen
-import com.example.fullstacktry.ui.screen.addscreen.AddViewModel
+import com.example.fullstacktry.ui.screen.add.AddScreen
+import com.example.fullstacktry.ui.screen.add.AddViewModel
+import com.example.fullstacktry.ui.screen.edit.EditScreen
 import com.example.fullstacktry.ui.screen.home.HomeScreen
 import com.example.fullstacktry.ui.screen.home.HomeViewModel
 
@@ -53,7 +56,16 @@ fun FullStackApp(
         ) {
             composable(Screen.Home.route) {
                 val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
-                HomeScreen(homeViewModel.uiState)
+                HomeScreen(uiState = homeViewModel.uiState, navigateToUpdate ={profileId ->
+                    navController.navigate(Screen.Update.createRoute(profileId))
+                } )
+            }
+
+            composable(Screen.Update.route, arguments = listOf(navArgument("profileId"){
+                type = NavType.IntType
+            })){ data ->
+                val profileId = data.arguments?.getInt("profileId") ?: -1
+                EditScreen(id = profileId)
             }
             composable(Screen.Add.route) {
                 val addViewModel: AddViewModel = viewModel(factory = AddViewModel.Factory)
