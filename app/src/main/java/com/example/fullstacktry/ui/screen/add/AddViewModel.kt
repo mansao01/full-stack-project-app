@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.FullStackApplication
+import com.example.fullstacktry.FullStackApplication
 import com.example.fullstacktry.data.FullStackRepository
 import com.example.fullstacktry.network.request.PostProfileRequest
 import com.example.fullstacktry.ui.common.AddUiState

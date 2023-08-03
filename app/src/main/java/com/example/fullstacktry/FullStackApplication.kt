@@ -1,4 +1,4 @@
-package com.example
+package com.example.fullstacktry
 
 import android.app.Application
 import com.example.fullstacktry.data.AppContainer
