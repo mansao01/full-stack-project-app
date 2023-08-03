@@ -67,7 +67,9 @@ fun FullStackApp(
             })){ data ->
                 val editViewMode: EditViewModel = viewModel(factory = EditViewModel.Factory)
                 val profileId = data.arguments?.getInt("profileId") ?: -1
-                EditScreen(id = profileId, uiState = editViewMode.uiState)
+                EditScreen(id = profileId, uiState = editViewMode.uiState, navigateToHome = {
+                    navController.navigate(Screen.Home.route)
+                })
             }
 
             composable(Screen.Add.route) {

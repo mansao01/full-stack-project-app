@@ -38,12 +38,15 @@ import com.example.fullstacktry.R
 import com.example.fullstacktry.network.request.UpdateProfileRequest
 import com.example.fullstacktry.ui.common.UpdateUiState
 import com.example.fullstacktry.ui.component.ProgressbarDialog
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 
 @Composable
 fun EditScreen(
     id: Int,
     uiState: UpdateUiState,
+    navigateToHome: () ->Unit,
     modifier: Modifier = Modifier,
     editViewModel: EditViewModel = viewModel(factory = EditViewModel.Factory)
 ) {
@@ -56,12 +59,19 @@ fun EditScreen(
         is UpdateUiState.Loading -> ProgressbarDialog()
         is UpdateUiState.StandBy -> EditScreenContent(
             editViewModel = editViewModel,
+            navigateToHome = navigateToHome,
             id = id,
             nameValue = uiState.getProfileByIdResponse.name,
             ageValue = uiState.getProfileByIdResponse.age,
             addressValue = uiState.getProfileByIdResponse.address
         )
-        is UpdateUiState.Success -> uiState.updateData.msg?.let { mToast(context, it) }
+        is UpdateUiState.Success -> {
+            uiState.updateData.msg?.let { mToast(context, it) }
+
+
+
+
+        }
         is UpdateUiState.Error -> mToast(context, uiState.message)
         is UpdateUiState.ErrorGetProfileData -> mToast(
             context,
@@ -74,6 +84,7 @@ fun EditScreen(
 @Composable
 fun EditScreenContent(
     editViewModel: EditViewModel,
+    navigateToHome: () ->Unit,
     id:Int,
     nameValue: String,
     ageValue: Int,
@@ -207,6 +218,7 @@ fun EditScreenContent(
                                 address
                             )
                         )
+                        navigateToHome()
                     }
                 }
             },
