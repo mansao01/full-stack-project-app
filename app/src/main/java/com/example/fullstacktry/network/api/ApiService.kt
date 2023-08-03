@@ -38,6 +38,7 @@ interface ApiService {
 
     @PATCH("profile/{id}")
     suspend fun updateProfile(
+        @Path("id") id:Int,
         @Body update: UpdateProfileRequest
     ):UpdateProfileResponse
 

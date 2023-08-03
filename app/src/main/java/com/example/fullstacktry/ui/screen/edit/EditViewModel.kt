@@ -37,11 +37,11 @@ class EditViewModel(private val fullStackRepository: FullStackRepository) : View
         }
     }
 
-    fun updateProfileData(updateProfileRequest: UpdateProfileRequest){
+    fun updateProfileData(id:Int,updateProfileRequest: UpdateProfileRequest){
         viewModelScope.launch {
             uiState = UpdateUiState.Loading
             uiState = try {
-                val result = fullStackRepository.updateProfile(updateProfileRequest)
+                val result = fullStackRepository.updateProfile(id,updateProfileRequest)
                 UpdateUiState.Success(result!!)
             }catch (e: IOException) {
                 UpdateUiState.Error(e.message.toString())

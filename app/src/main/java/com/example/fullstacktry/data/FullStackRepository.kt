@@ -18,7 +18,7 @@ interface FullStackRepository {
 
     suspend fun deleteProfile(id: Int): DeleteProfileResponse
 
-    suspend fun updateProfile(updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse?
+    suspend fun updateProfile(id:Int,updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse?
 }
 
 class NetworkFullStackRepository(
@@ -43,7 +43,7 @@ class NetworkFullStackRepository(
     override suspend fun deleteProfile(id: Int): DeleteProfileResponse =
         apiService.deleteProfile(id)
 
-    override suspend fun updateProfile(updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse =
-        apiService.updateProfile(updateProfileRequest)
+    override suspend fun updateProfile(id:Int,updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse =
+        apiService.updateProfile(id,updateProfileRequest)
 
 }

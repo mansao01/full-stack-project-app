@@ -56,6 +56,7 @@ fun EditScreen(
         is UpdateUiState.Loading -> ProgressbarDialog()
         is UpdateUiState.StandBy -> EditScreenContent(
             editViewModel = editViewModel,
+            id = id,
             nameValue = uiState.getProfileByIdResponse.name,
             ageValue = uiState.getProfileByIdResponse.age,
             addressValue = uiState.getProfileByIdResponse.address
@@ -73,6 +74,7 @@ fun EditScreen(
 @Composable
 fun EditScreenContent(
     editViewModel: EditViewModel,
+    id:Int,
     nameValue: String,
     ageValue: Int,
     addressValue: String,
@@ -198,6 +200,7 @@ fun EditScreenContent(
                     address.isEmpty() -> isAddressNull = true
                     else -> {
                         editViewModel.updateProfileData(
+                            id,
                             UpdateProfileRequest(
                                 name,
                                 age.toInt(),
