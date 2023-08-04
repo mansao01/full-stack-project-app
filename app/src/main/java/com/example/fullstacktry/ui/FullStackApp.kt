@@ -109,8 +109,8 @@ fun BottomBar(
             )
         )
         BottomNavigation(
-            backgroundColor = MaterialTheme.colorScheme.primary,
-//            contentColor = Color.White
+            backgroundColor = MaterialTheme.colorScheme.background,
+            contentColor = MaterialTheme.colorScheme.background
         ) {
             navigationItems.map { item ->
                 BottomNavigationItem(
@@ -119,7 +119,7 @@ fun BottomBar(
                         Icon(
                             imageVector = item.icon,
                             contentDescription = item.contentDescription,
-                            tint = Color.White
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     },
                     onClick = {
@@ -134,8 +134,8 @@ fun BottomBar(
                     label = {
                         Text(text = item.title)
                     },
-                    unselectedContentColor = Color.White.copy(0.4f),
-                    selectedContentColor = Color.White,
+                    unselectedContentColor = MaterialTheme.colorScheme.primary.copy(0.4f),
+                    selectedContentColor = MaterialTheme.colorScheme.primary,
 
                     )
             }

@@ -2,8 +2,8 @@
     <string name="app_name">FullStackTry</string>
     <string name="add_data">Add Data</string>
     <string name="edit_data">Edit Data</string>
-    <string name="home">Home</string>
-    <string name="add">Add</string>
+    <string name="home">HOME</string>
+    <string name="add">ADD</string>
     <string name="enter_your_name">Enter Your Name</string>
     <string name="enter_your_age">Enter Your Age</string>
     <string name="enter_your_address">Enter Your Address</string>
