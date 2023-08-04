@@ -11,6 +11,7 @@
     <string name="age">Age</string>
     <string name="address">Address</string>
     <string name="require">*require</string>
+    <string name="profile">Profile</string>
     <string name="fail_to_post_data">Fail to post data</string>
     <string name="failed_to_get_profile_s_data">Failed to get profile\'s data</string>
     <string name="seems_you_don_t_have_any_data_please_create_first">Seems you don\'t have any data</string>

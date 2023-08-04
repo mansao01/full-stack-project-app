@@ -64,12 +64,12 @@ fun EditScreen(
             id = id,
             nameValue = uiState.getProfileByIdResponse.name,
             ageValue = uiState.getProfileByIdResponse.age,
-            addressValue = uiState.getProfileByIdResponse.address
+            addressValue = uiState.getProfileByIdResponse.address,
+            modifier = modifier
         )
 
         is UpdateUiState.Success -> {
             uiState.updateData.msg?.let { mToast(context, it) }
-
 
         }
 
