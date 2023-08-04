@@ -1,4 +1,5 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
+@file:OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
     ExperimentalMaterial3Api::class
 )
 
@@ -6,10 +7,12 @@ package com.example.fullstacktry.ui.screen.edit
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.PersonOutline
@@ -38,15 +41,13 @@ import com.example.fullstacktry.R
 import com.example.fullstacktry.network.request.UpdateProfileRequest
 import com.example.fullstacktry.ui.common.UpdateUiState
 import com.example.fullstacktry.ui.component.ProgressbarDialog
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 
 
 @Composable
 fun EditScreen(
     id: Int,
     uiState: UpdateUiState,
-    navigateToHome: () ->Unit,
+    navigateToHome: () -> Unit,
     modifier: Modifier = Modifier,
     editViewModel: EditViewModel = viewModel(factory = EditViewModel.Factory)
 ) {
@@ -65,13 +66,13 @@ fun EditScreen(
             ageValue = uiState.getProfileByIdResponse.age,
             addressValue = uiState.getProfileByIdResponse.address
         )
+
         is UpdateUiState.Success -> {
             uiState.updateData.msg?.let { mToast(context, it) }
 
 
-
-
         }
+
         is UpdateUiState.Error -> mToast(context, uiState.message)
         is UpdateUiState.ErrorGetProfileData -> mToast(
             context,
@@ -84,14 +85,22 @@ fun EditScreen(
 @Composable
 fun EditScreenContent(
     editViewModel: EditViewModel,
-    navigateToHome: () ->Unit,
-    id:Int,
+    navigateToHome: () -> Unit,
+    id: Int,
     nameValue: String,
     ageValue: Int,
     addressValue: String,
     modifier: Modifier = Modifier
 ) {
     Column(modifier.fillMaxSize()) {
+
+        Icon(
+            imageVector = Icons.Default.ArrowBack,
+            contentDescription = null,
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .padding(top = 16.dp)
+                .clickable { navigateToHome() })
         Text(
             text = stringResource(R.string.edit_data),
             color = MaterialTheme.colorScheme.primary,

@@ -50,7 +50,7 @@ fun ListItem(
                 Text(
                     text = address, modifier = modifier
                         .padding(horizontal = 8.dp)
-                        .padding(top = 4.dp)
+                        .padding(vertical = 4.dp)
                 )
 
             }

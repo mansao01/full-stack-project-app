@@ -111,7 +111,7 @@ fun BottomBar(
         )
         BottomNavigation(
             backgroundColor = MaterialTheme.colorScheme.primary,
-            contentColor = Color.White
+//            contentColor = Color.White
         ) {
             navigationItems.map { item ->
                 BottomNavigationItem(

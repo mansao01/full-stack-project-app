@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,8 +22,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.fullstacktry.R
 import com.example.fullstacktry.network.response.DataItem
 import com.example.fullstacktry.ui.common.HomeUiState
 import com.example.fullstacktry.ui.component.ErrorScreen
@@ -81,10 +84,12 @@ fun UserList(
                 modifier = Modifier.size(62.dp)
 
             )
-            Text(text = "Seems you don't have any data")
+            Text(text = stringResource(R.string.seems_you_don_t_have_any_data_please_create_first))
         }
     } else {
-        LazyColumn(modifier = modifier.fillMaxWidth()) {
+        LazyColumn(modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp)) {
             items(userList) { data ->
                 ListItem(
                     id = data.id,
