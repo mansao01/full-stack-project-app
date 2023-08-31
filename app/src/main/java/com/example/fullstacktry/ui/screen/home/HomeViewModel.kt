@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.fullstacktry.FullStackApplication
 import com.example.fullstacktry.data.FullStackRepository
 import com.example.fullstacktry.ui.common.HomeUiState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -53,6 +54,8 @@ class HomeViewModel(private val fullStackRepository: FullStackRepository) : View
             try {
                 fullStackRepository.deleteProfile(id)
                 _isLoading.value = false
+                delay(500)
+                getUserList()
 
             }catch (e: IOException) {
                 _isLoading.value = false

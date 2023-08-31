@@ -59,7 +59,6 @@ fun ListItem(
 
             IconButton(onClick = {
                 homeViewModel.deleteProfile(id)
-                homeViewModel.getUserList()
             }) {
                 Icon(
                     imageVector = Icons.Default.Delete,

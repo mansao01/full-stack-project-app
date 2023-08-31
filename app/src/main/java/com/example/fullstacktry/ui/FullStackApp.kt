@@ -56,19 +56,22 @@ fun FullStackApp(
         ) {
             composable(Screen.Home.route) {
                 val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
-                HomeScreen(uiState = homeViewModel.uiState, navigateToUpdate ={profileId ->
+                HomeScreen(uiState = homeViewModel.uiState, navigateToUpdate = { profileId ->
                     navController.navigate(Screen.Update.createRoute(profileId))
-                } )
+                })
             }
 
-            composable(Screen.Update.route, arguments = listOf(navArgument("profileId"){
+            composable(Screen.Update.route, arguments = listOf(navArgument("profileId") {
                 type = NavType.IntType
-            })){ data ->
+            })) { data ->
                 val editViewMode: EditViewModel = viewModel(factory = EditViewModel.Factory)
                 val profileId = data.arguments?.getInt("profileId") ?: -1
-                EditScreen(id = profileId, uiState = editViewMode.uiState, navigateToHome = {
-                    navController.navigate(Screen.Home.route)
-                })
+                EditScreen(
+                    id = profileId,
+                    uiState = editViewMode.uiState,
+                    navigateToHome = {
+                        navController.navigate(Screen.Home.route)
+                    })
             }
 
             composable(Screen.Add.route) {

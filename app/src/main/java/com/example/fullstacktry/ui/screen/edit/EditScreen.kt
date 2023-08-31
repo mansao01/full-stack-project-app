@@ -93,7 +93,6 @@ fun EditScreenContent(
     modifier: Modifier = Modifier
 ) {
     Column(modifier.fillMaxSize()) {
-
         Icon(
             imageVector = Icons.Default.ArrowBack,
             contentDescription = null,
